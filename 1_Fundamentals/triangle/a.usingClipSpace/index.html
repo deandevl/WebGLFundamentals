@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Fundamentals</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    canvas {
+      width: 600px;
+      height: 600px;
+      border: red solid 2px;
+      margin-top: 20px;
+    }
+    #container {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+  <script defer type="module" src="main.js"></script>
+  <body>
+    <div id="container">
+      <div id="positions">
+        <div>Positions Using Clip Space:</div>
+        <div><input type="radio" id="corner" name="positions" checked="true" /><label for="corner">Corner</label></div>
+        <div><input type="radio" id="bigger" name="positions" /><label for="bigger">Bigger</label></div>
+        <div><input type="radio" id="center" name="positions" /><label for="center">Center</label></div>
+      </div>
+      <canvas id="my_canvas"></canvas>
+    </div>
+  </body>
+</html>

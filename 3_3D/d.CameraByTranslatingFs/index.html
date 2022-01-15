@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Fundamentals</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+    #ui {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 900px;
+    }
+    .inputs {
+      display: flex;
+      flex-direction: column;
+    }
+    .inout {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  </style>
+  <script defer type="module" src="main.js"></script>
+  <body>
+    <div id="ui">
+      <div CLASS="inputs">
+        <label for="cameraAngle">Camera Angle</label>
+        <div class="inout">
+          <input type="range" name="cameraAngle" id="cameraAngle">
+          <output id="cameraAngle_output" for="cameraAngle"></output>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="my_canvas"></canvas>
+  </body>
+</html>
