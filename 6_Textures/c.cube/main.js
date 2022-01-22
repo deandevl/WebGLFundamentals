@@ -81,11 +81,6 @@ try {
     textureAttrib.bufferFormat(size, normalize, stride, offset);
   }
 
-  // Initialize a Texture2DClass and read/create an image
-  const texture2D = new Texture2DClass(gl, gl.TEXTURE0 + 0)
-  // Read in the image texture
-  texture2D.setImage('./noodles.jpg', gl.TEXTURE0 + 0);
-
   // Set up the uniforms
   // Set up matrix uniform 'u_matrix'
   const matrixUniform = new UniformClass(gl, program, 'u_matrix_m4', 'uniformMatrix4fv')
@@ -126,8 +121,13 @@ try {
   const viewPerspective_m4 = m4_create();
   m4_multiply(viewPerspective_m4, perspective_m4, viewMatrix_m4);
 
-  // start drawing scene
-  window.requestAnimationFrame(drawScene);
+  // Initialize a Texture2DClass and read/create an image
+  const texture2D = new Texture2DClass(gl)
+  // Read in the image texture
+  texture2D.loadTexture('noodles.jpg').then(()=> {
+    // start drawing scene
+    window.requestAnimationFrame(drawScene);
+  })
 
   // define a function for drawing the scene
   function drawScene(now){

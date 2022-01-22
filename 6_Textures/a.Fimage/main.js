@@ -20,6 +20,12 @@ import {
   multiply as m4_multiply
 } from 'gl-matrix/esm/mat4';
 
+function requestCORSIfNotSameOrigin(img, url) {
+  if ((new URL(url, window.location.href)).origin !== window.location.origin) {
+    img.crossOrigin = "";
+  }
+}
+
 try {
   const context = createGLcontext('my_canvas');
   const gl = context.gl;
@@ -45,15 +51,13 @@ try {
   // Tell context to use our program (a pair of shaders)
   gl.useProgram(program);
 
-  // Set up position attribute for 'a_position'
+  // Set up position attribute for 'a_position_v4'
   // Create and set the attribute position data (a_position_v4)
-  const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program,'a_position_v4');
+  const positionAttrib = new AttributeClass(gl, gl.FLOAT, program,'a_position_v4');
   positionAttrib.setData(F_3D_positions_list, gl.STATIC_DRAW);
 
   // Set up varying texture coordinates attribute for 'a_texcoord_v2'
-  const texture_type = gl.FLOAT; // the data is 32bit floats
-  const textureAttrib = new AttributeClass(gl, texture_type, program,'a_texcoord_v2');
+  const textureAttrib = new AttributeClass(gl, gl.FLOAT, program,'a_texcoord_v2');
   textureAttrib.setData(F_3D_texcoords_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers
@@ -81,13 +85,6 @@ try {
     textureAttrib.bufferFormat(size, normalize, stride, offset);
   }
 
-  // Initialize a Texture2DClass and read/create an image
-  const texture2D = new Texture2DClass(gl, gl.TEXTURE0 + 0)
-
-  // Fill texture with blue color
-  //texture2D.setColor([0, 0, 255, 255]);
-  texture2D.setImage('./f-texture.png', gl.TEXTURE0 + 0);
-
   // Set up the uniforms
   // Set up matrix uniform 'u_matrix_m4'
   const matrixUniform = new UniformClass(gl, program, 'u_matrix_m4', 'uniformMatrix4fv')
@@ -113,8 +110,13 @@ try {
   let translation = [-150, 60, -380];
   let scale = [1, 1, 1];
 
-  // start drawing scene
-  window.requestAnimationFrame(drawScene);
+  // Load a texture image
+  // Initialize a Texture2DClass and read/create an image
+  const texture2D = new Texture2DClass(gl);
+  texture2D.loadTexture('brick.jpg').then(() => {
+    // start drawing scene
+    window.requestAnimationFrame(drawScene);
+  })
 
   // define a function for drawing the scene
   function drawScene(now){
