@@ -5,7 +5,7 @@
 
 import {cube_positions_list, cube_texcoords_list} from '../../positions-colors/cube.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {Texture2DClass} from "web-gl-helpers";
 import {TransformsClass} from "web-gl-helpers";
@@ -48,12 +48,12 @@ try {
   // Set up position attribute for 'a_position'
   // Create and set the attribute position data (a_position_v4)
   const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program,'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, position_type, program,'a_position_v4');
   positionAttrib.setData(cube_positions_list, gl.STATIC_DRAW);
 
   // Set up varying texture coordinates attribute for 'a_texcoord_v2'
-  const texture_type = gl.FLOAT; // the data is 32bit floats
-  const textureAttrib = new AttributeClass(gl, texture_type, program,'a_texcoord_v2');
+  const texture_type = gl.FLOAT; ArrayBufferClass// the data is 32bit floats
+  const textureAttrib = new ArrayBufferClass(gl, texture_type, program,'a_texcoord_v2');
   textureAttrib.setData(cube_texcoords_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers

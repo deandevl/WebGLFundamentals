@@ -5,7 +5,7 @@
 
 import {F_3D_positions_list, F_3D_colors_list, F_3D_normals_list} from '../../positions-colors/F-3D.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {TransformsClass} from "web-gl-helpers";
 import {resizeCanvasToDisplaySize} from "web-gl-helpers"
@@ -63,7 +63,7 @@ try {
 
   // Set up vec4 position attribute for 'a_position_v4' from vertex shader
   const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program, 'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, position_type, program, 'a_position_v4');
   //Center the position the F around the origin and flip it around.
   const F_transform_m4 = TransformsClass.getXYZRotationMatrix('x', 180);
   const F_translate_m4 = TransformsClass.getTranslationMatrix([-50, -75, -15])
@@ -83,7 +83,7 @@ try {
   // Set up the vec3 normal attribute for 'a_normal_v3' from vertex shader
   // Create and set the attribute normal data
   const normal_type = gl.FLOAT; // the data is 32bit floats
-  const normalAttrib = new AttributeClass(gl, normal_type, program, 'a_normal_v3');
+  const normalAttrib = new ArrayBufferClass(gl, normal_type, program, 'a_normal_v3');
   normalAttrib.setData(F_3D_normals_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers

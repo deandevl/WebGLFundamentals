@@ -5,7 +5,7 @@
 
 import {F_3D_positions_list, F_3D_colors_list} from '../../positions-colors/F-3D.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {TransformsClass} from "web-gl-helpers";
 import {resizeCanvasToDisplaySize} from "web-gl-helpers"
@@ -60,7 +60,7 @@ try {
   // Set up position attribute for 'a_position'
   // Create and set the attribute position data (a_position_v4)
   const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program,'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, position_type, program,'a_position_v4');
 
   //Center the position the F around the origin and flip it around.
   const F_transform_m4 = TransformsClass.getXYZRotationMatrix('x', 180);
@@ -81,7 +81,7 @@ try {
 
   // Set up varying color attribute for 'a_color_v4'
   const color_type = gl.UNSIGNED_BYTE; // the data is UNSIGNED_BYTE
-  const colorAttrib = new AttributeClass(gl, color_type, program,'a_color_v4');
+  const colorAttrib = new ArrayBufferClass(gl, color_type, program,'a_color_v4');
   colorAttrib.setData(F_3D_colors_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers

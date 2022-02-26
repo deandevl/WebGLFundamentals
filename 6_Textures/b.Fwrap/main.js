@@ -4,10 +4,9 @@
 'use strict';
 
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {Texture2DClass} from "web-gl-helpers";
-import {TransformsClass} from "web-gl-helpers";
 import {resizeCanvasToDisplaySize} from "web-gl-helpers"
 import {createShader} from "web-gl-helpers";
 import {createGLcontext} from "web-gl-helpers";
@@ -19,14 +18,8 @@ import {fromValues as v3_fromValues} from 'gl-matrix/esm/vec3';
 import {
   create as m4_create,
   identity as m4_identity,
-  fromXRotation,
-  fromYRotation,
-  fromZRotation,
   fromScaling as m4_fromScaling,
   fromTranslation as m4_fromTranslation,
-  fromValues as fromValues_m4,
-  multiply,
-  perspective,
   ortho
 } from 'gl-matrix/esm/mat4';
 
@@ -69,7 +62,7 @@ try {
   // Set up position attribute for 'a_position'
   // Create and set the attribute position data (a_position_v4)
   const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program,'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, position_type, program,'a_position_v4');
   const positions = [
     -0.5,  0.5,  0.5,
     0.5,  0.5,  0.5,
@@ -82,7 +75,7 @@ try {
 
   // Set up varying texture coordinates attribute for 'a_texcoord_v2'
   const texture_type = gl.FLOAT; // the data is 32bit floats
-  const textureAttrib = new AttributeClass(gl, texture_type, program,'a_texcoord_v2');
+  const textureAttrib = new ArrayBufferClass(gl, texture_type, program,'a_texcoord_v2');
   const texcoords = [
    -3, -1,
     2, -1,
@@ -131,7 +124,7 @@ try {
 
   // Fill texture with blue color
   //texture2D.setColor([0, 125, 155, 125]);
-  texture2D.setImage('./f-texture.png', gl.TEXTURE0 + 0);
+  texture2D.loadTexture('./f-texture.png');
 
   // Set up the uniforms
   // Set up matrix uniform 'u_matrix_m4'

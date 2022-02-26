@@ -5,7 +5,7 @@
 
 import {HeadData} from '../../positions-colors/HeadData.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {TransformsClass} from "web-gl-helpers";
 import {resizeCanvasToDisplaySize} from "web-gl-helpers"
@@ -60,7 +60,7 @@ try {
   // Set up position attribute for 'a_position'
   // Create and set the attribute position data (a_position_v4)
   const position_type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, position_type, program,'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, position_type, program,'a_position_v4');
   // Define the head data
   const positions = new Float32Array(HeadData.positions)
   const primitiveType = gl.TRIANGLES;
@@ -86,7 +86,7 @@ try {
 
   // Set up varying color attribute for 'a_color_v4'
   const color_type = gl.UNSIGNED_BYTE; // the data is UNSIGNED_BYTE
-  const colorAttrib = new AttributeClass(gl, color_type, program,'a_color_v4');
+  const colorAttrib = new ArrayBufferClass(gl, color_type, program,'a_color_v4');
   // Define the head color data
   const normals_list_m3 = HeadData.normals;
   const colors_list = new Uint8Array(normals_list_m3.length);

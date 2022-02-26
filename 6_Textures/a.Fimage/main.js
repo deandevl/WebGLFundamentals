@@ -5,7 +5,7 @@
 
 import {F_3D_positions_list, F_3D_texcoords_list} from '../../positions-colors/F-3D.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {TransformsClass} from "web-gl-helpers";
 import {Texture2DClass} from "web-gl-helpers";
@@ -53,11 +53,11 @@ try {
 
   // Set up position attribute for 'a_position_v4'
   // Create and set the attribute position data (a_position_v4)
-  const positionAttrib = new AttributeClass(gl, gl.FLOAT, program,'a_position_v4');
+  const positionAttrib = new ArrayBufferClass(gl, gl.FLOAT, program,'a_position_v4');
   positionAttrib.setData(F_3D_positions_list, gl.STATIC_DRAW);
 
   // Set up varying texture coordinates attribute for 'a_texcoord_v2'
-  const textureAttrib = new AttributeClass(gl, gl.FLOAT, program,'a_texcoord_v2');
+  const textureAttrib = new ArrayBufferClass(gl, gl.FLOAT, program,'a_texcoord_v2');
   textureAttrib.setData(F_3D_texcoords_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers

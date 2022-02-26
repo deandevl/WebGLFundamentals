@@ -4,7 +4,7 @@
 'use strict';
 import {F_2D_positions_list} from '../../positions-colors/F-2D.js';
 import {vertex_shader, fragment_shader} from "./shaders.js";
-import {AttributeClass} from "web-gl-helpers";
+import {ArrayBufferClass} from "web-gl-helpers";
 import {UniformClass} from "web-gl-helpers";
 import {resizeCanvasToDisplaySize} from "web-gl-helpers"
 import {createShader} from "web-gl-helpers";
@@ -42,7 +42,7 @@ try {
 
   // Set up attribute for 'a_position_v2'
   const type = gl.FLOAT; // the data is 32bit floats
-  const positionAttrib = new AttributeClass(gl, type, program,'a_position_v2');
+  const positionAttrib = new ArrayBufferClass(gl, type, program,'a_position_v2');
   positionAttrib.setData(F_2D_positions_list, gl.STATIC_DRAW);
 
   // Associate shader attributes with corresponding data buffers
